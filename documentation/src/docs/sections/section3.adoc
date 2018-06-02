@@ -1,0 +1,11 @@
+== Section 3
+
+=== Section 3 subtitle
+
+below you can see how to insert a photo
+from what I could gather - photos should not have a path added, because they are all copied to a image folder that is configured in pom.
+
+It has to work like that, because diagrams are rendered to photos and maven plugin needs this directory defined.
+
+image::asciidoc-logo.png[]
+

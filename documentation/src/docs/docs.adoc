@@ -1,0 +1,17 @@
+= Example AsciiDoc Documentation
+Radosław Domański
+:doctype: article
+:encoding: utf-8
+:lang: pl
+:toc: left
+:numbered:
+
+include::sections/section1.adoc[]
+
+<<<
+
+include::sections/section2.adoc[]
+
+<<<
+
+include::sections/section3.adoc[]

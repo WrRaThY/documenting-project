@@ -1,0 +1,11 @@
+== Section 1
+
+=== Section 1 subtitle
+
+you can write something intelligent here using AsciiDoc format
+
+and here you can see how to import a diagram from an external file
+[plantuml,example,png,align="center"]
+----
+include::../diagrams/example.pu[]
+----

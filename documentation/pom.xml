@@ -9,5 +9,79 @@
 
     <artifactId>documentation</artifactId>
 
+    <properties>
+        <!-- docs gen -->
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+
+        <asciidoctor.maven.plugin.version>1.5.6</asciidoctor.maven.plugin.version>
+        <asciidoctorj-diagram.version>1.5.8</asciidoctorj-diagram.version>
+        <asciidoctorj.pdf.version>1.5.0-alpha.16</asciidoctorj.pdf.version>
+        <asciidoctorj.version>1.5.6</asciidoctorj.version>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>generate-html-docs</id> <!-- NOT enabled by default -->
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctor-maven-plugin</artifactId>
+                        <version>${asciidoctor.maven.plugin.version}</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.asciidoctor</groupId>
+                                <artifactId>asciidoctorj-pdf</artifactId>
+                                <version>${asciidoctorj.pdf.version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.asciidoctor</groupId>
+                                <artifactId>asciidoctorj-diagram</artifactId>
+                                <version>${asciidoctorj-diagram.version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.asciidoctor</groupId>
+                                <artifactId>asciidoctorj</artifactId>
+                                <version>${asciidoctorj.version}</version>
+                            </dependency>
+                        </dependencies>
+                        <configuration>
+                            <sourceDirectory>src/docs</sourceDirectory>
+                            <sourceDocumentName>docs.adoc</sourceDocumentName>
+                            <requires>
+                                <require>asciidoctor-diagram</require> <!-- without that diagrams will not be generated-->
+                            </requires>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>asciidoc-to-html</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>process-asciidoc</goal>
+                                </goals>
+                                <configuration>
+                                    <backend>html5</backend>
+                                    <sourceHighlighter>coderay</sourceHighlighter>
+                                    <attributes>
+                                        <imagesdir>./images</imagesdir> <!-- again, needed by diagrams -->
+                                        <toc>left</toc>
+                                        <icons>font</icons>
+                                        <sectanchors>true</sectanchors>
+                                        <!-- what is below will generate header/footer with version info -->
+                                        <idprefix />
+                                        <idseparator>-</idseparator>
+                                        <project-version>${project.version}</project-version>
+                                        <revnumber>${project.version}</revnumber>
+                                        <revdate>${maven.build.timestamp}</revdate>
+                                        <organization>${project.organization.name}</organization>
+                                    </attributes>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

@@ -1,0 +1,24 @@
+== Section 2
+
+=== Section 2 subtitle
+
+and here you can see how to create a diagram inside this file
+[plantuml,example,png,align="center"]
+----
+@startuml
+
+title example diagram
+
+participant "very long client name" as client
+participant "very long server name" as server
+
+client -> server : sending a file
+activate server
+server -> server : complicated \n processing
+client <- server : sending a response
+deactivate server
+
+@enduml
+----
+
+it's possible, but I prefer importing files than editing them here

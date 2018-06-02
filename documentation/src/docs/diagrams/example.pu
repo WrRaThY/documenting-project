@@ -1,0 +1,14 @@
+@startuml
+
+title example diagram
+
+participant "very long client name" as client
+participant "very long server name" as server
+
+client -> server : sending a file
+activate server
+server -> server : complicated \n processing
+client <- server : sending a response
+deactivate server
+
+@enduml
